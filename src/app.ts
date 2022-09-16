@@ -4,7 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import cors from "cors";
 import { SudokuInfoType, sudokuInfoYup } from "./interface";
-import { dimacsToVariable, solve } from "./logic/logic";
+import { solve } from "./logic/logic";
 
 dotenv.config();
 
