@@ -11,7 +11,7 @@ module.exports = {
     production: {
       user: 'debian',
       host: '51.178.45.66',
-      ref: 'origin/master',
+      ref: 'origin/main',
       repo: 'git@github.com:BillyRonico412/sudoku-solver-back.git',
       path: '/home/debian/pm2',
       'pre-deploy-local': '',
