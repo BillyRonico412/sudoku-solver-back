@@ -1,7 +1,12 @@
 module.exports = {
   apps: [{
     script: 'out/app.js',
-    watch: '.'
+    watch: '.',
+    env: {
+      PORT: 8081,
+      URL_FRONT: "http://localhost:5174",
+      URL_BACK: "http://localhost",
+    }
   }],
 
   deploy: {
