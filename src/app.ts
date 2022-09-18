@@ -19,7 +19,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
-app.post("/", async (req, res) => {
+app.post(process.env.PREFIX + "/", async (req, res) => {
     const body = req.body;
     if (!(await sudokuInfoYup.isValid(body))) {
         return res.status(400).end();
@@ -27,9 +27,9 @@ app.post("/", async (req, res) => {
     const sudokuInfo = body as SudokuInfoType;
     const satRes = await solve(sudokuInfo);
     if (satRes === null) {
-        return res.status(400).end()
+        return res.status(400).end();
     }
-    return res.status(200).json(satRes)
+    return res.status(200).json(satRes);
 });
 
 app.listen(process.env.PORT, () => {
