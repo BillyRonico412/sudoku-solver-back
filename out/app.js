@@ -24,7 +24,7 @@ const app = (0, express_1.default)();
 app.use((0, morgan_1.default)("dev"));
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)({
-    origin: "*",
+    origin: process.env.URL_FRONT,
 }));
 app.post(process.env.PREFIX + "/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
@@ -39,5 +39,5 @@ app.post(process.env.PREFIX + "/", (req, res) => __awaiter(void 0, void 0, void 
     return res.status(200).json(satRes);
 }));
 app.listen(process.env.PORT, () => {
-    console.log(`Listen to ${process.env.URL_BACK}:${process.env.PORT}`);
+    console.log(`Listen to :${process.env.PORT}`);
 });
