@@ -10,10 +10,13 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
-
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 
 app.post(process.env.PREFIX + "/", async (req, res) => {
     const body = req.body;
