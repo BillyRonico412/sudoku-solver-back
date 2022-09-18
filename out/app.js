@@ -26,7 +26,7 @@ app.use((0, cors_1.default)({
 }));
 app.use((0, morgan_1.default)("dev"));
 app.use(body_parser_1.default.json());
-app.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post(process.env.PREFIX + "/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     if (!(yield interface_1.sudokuInfoYup.isValid(body))) {
         return res.status(400).end();
