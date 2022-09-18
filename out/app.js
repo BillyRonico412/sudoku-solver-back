@@ -36,6 +36,7 @@ app.post(process.env.PREFIX + "/", (req, res) => __awaiter(void 0, void 0, void 
     if (satRes === null) {
         return res.status(400).end();
     }
+    res.setHeader("Access-Control-Allow-Origin", process.env.URL_FRONT);
     return res.status(200).json(satRes);
 }));
 app.listen(process.env.PORT, () => {

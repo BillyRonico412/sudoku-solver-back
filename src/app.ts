@@ -28,6 +28,7 @@ app.post(process.env.PREFIX + "/", async (req, res) => {
     if (satRes === null) {
         return res.status(400).end();
     }
+    res.setHeader("Access-Control-Allow-Origin", process.env.URL_FRONT as string)
     return res.status(200).json(satRes);
 });
 
