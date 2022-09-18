@@ -4,7 +4,6 @@ module.exports = {
     watch: '.',
     env: {
       PORT: 8081,
-      URL_FRONT: "https://sudoku-solver-front.vercel.app",
       URL_BACK: "http://localhost",
       PREFIX: "/sudoku"
     }

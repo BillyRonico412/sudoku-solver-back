@@ -10,11 +10,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-    cors({
-        origin: process.env.URL_FRONT,
-    })
-);
+app.use(cors());
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
