@@ -14,7 +14,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(
     cors({
-        origin: "*",
+        origin: process.env.URL_FRONT,
     })
 );
 
@@ -32,5 +32,5 @@ app.post(process.env.PREFIX + "/", async (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Listen to ${process.env.URL_BACK}:${process.env.PORT}`);
+    console.log(`Listen to :${process.env.PORT}`);
 });
