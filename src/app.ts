@@ -2,7 +2,6 @@ import bodyParser from "body-parser";
 import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
-import cors from "cors";
 import { SudokuInfoType, sudokuInfoYup } from "./interface";
 import { solve } from "./logic/logic";
 
@@ -12,7 +11,6 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cors())
 
 app.post(process.env.PREFIX + "/", async (req, res) => {
     const body = req.body;
