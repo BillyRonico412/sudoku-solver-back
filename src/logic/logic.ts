@@ -16,8 +16,6 @@ export const execSat4J = async (
         const { stdout, stderr } = await promisify(exec)(
             `java -jar sat4j.jar MiniSAT ${src}`
         );
-        console.log(10);
-        console.log(stdout, stderr);
         if (stderr) {
             return null;
         }
@@ -264,10 +262,8 @@ export const solve = async (
     try {
         // Create File
         await writer(fileName, resString);
-        console.log(__dirname);
         // Solve File
         const satRes = await execSat4J(fileName);
-        console.log(6);
         if (!satRes) {
             return null;
         }
@@ -282,6 +278,5 @@ export const solve = async (
     } finally {
         // Delete File
         await deleter(fileName);
-        console.log(7);
     }
 };

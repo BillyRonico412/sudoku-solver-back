@@ -20,8 +20,6 @@ const uuid_1 = require("uuid");
 const execSat4J = (src) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(`java -jar sat4j.jar MiniSAT ${src}`);
-        console.log(10);
-        console.log(stdout, stderr);
         if (stderr) {
             return null;
         }
@@ -255,10 +253,8 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Create File
         yield writer(fileName, resString);
-        console.log(__dirname);
         // Solve File
         const satRes = yield (0, exports.execSat4J)(fileName);
-        console.log(6);
         if (!satRes) {
             return null;
         }
@@ -275,7 +271,6 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     finally {
         // Delete File
         yield deleter(fileName);
-        console.log(7);
     }
 });
 exports.solve = solve;
