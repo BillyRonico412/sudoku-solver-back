@@ -273,6 +273,7 @@ export const solve = async (
         const sudokuInfoRes = satResToSudokuInfo(satRes);
         return sudokuInfoRes;
     } catch (e) {
+        console.log(e)
         return null;
     } finally {
         // Delete File

@@ -265,6 +265,7 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
         return sudokuInfoRes;
     }
     catch (e) {
+        console.log(e);
         return null;
     }
     finally {
