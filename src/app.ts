@@ -18,7 +18,6 @@ app.post(process.env.PREFIX + "/", async (req, res) => {
         return res.status(400).end();
     }
     const sudokuInfo = body as SudokuInfoType;
-    console.log(sudokuInfo);
     const satRes = await solve(sudokuInfo);
     if (satRes === null) {
         return res.status(400).end();

@@ -28,7 +28,6 @@ app.post(process.env.PREFIX + "/", (req, res) => __awaiter(void 0, void 0, void 
         return res.status(400).end();
     }
     const sudokuInfo = body;
-    console.log(sudokuInfo);
     const satRes = yield (0, logic_1.solve)(sudokuInfo);
     if (satRes === null) {
         return res.status(400).end();
