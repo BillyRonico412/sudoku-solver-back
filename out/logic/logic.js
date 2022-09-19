@@ -20,6 +20,8 @@ const uuid_1 = require("uuid");
 const execSat4J = (src) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(`java -jar sat4j.jar MiniSAT ${src}`);
+        console.log(10);
+        console.log(stdout, stderr);
         if (stderr) {
             return null;
         }

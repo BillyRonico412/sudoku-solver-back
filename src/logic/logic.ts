@@ -16,6 +16,8 @@ export const execSat4J = async (
         const { stdout, stderr } = await promisify(exec)(
             `java -jar sat4j.jar MiniSAT ${src}`
         );
+        console.log(10)
+        console.log(stdout, stderr)
         if (stderr) {
             return null;
         }
