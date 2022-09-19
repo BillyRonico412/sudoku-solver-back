@@ -249,7 +249,7 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     clauses.forEach((clause) => (resString += `${clause
         .map(String)
         .reduce((v1, v2) => v1 + " " + v2)} 0\n`));
-    console.log(2, resString);
+    console.log(2);
     const writer = (0, util_1.promisify)(fs_1.default.appendFile);
     const deleter = (0, util_1.promisify)(fs_1.default.unlink);
     const fileName = (0, uuid_1.v4)();
@@ -257,8 +257,10 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Create File
         yield writer(fileName, resString);
+        console.log(5);
         // Solve File
         const satRes = yield (0, exports.execSat4J)(fileName);
+        console.log(6);
         if (!satRes) {
             return null;
         }
@@ -275,6 +277,7 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     finally {
         // Delete File
         yield deleter(fileName);
+        console.log(7);
     }
 });
 exports.solve = solve;

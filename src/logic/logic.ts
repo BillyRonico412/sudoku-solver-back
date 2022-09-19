@@ -258,7 +258,7 @@ export const solve = async (
                 .map(String)
                 .reduce((v1, v2) => v1 + " " + v2)} 0\n`)
     );
-    console.log(2, resString);
+    console.log(2);
     const writer = promisify(fs.appendFile);
     const deleter = promisify(fs.unlink);
     const fileName = v4();
@@ -266,8 +266,10 @@ export const solve = async (
     try {
         // Create File
         await writer(fileName, resString);
+        console.log(5)
         // Solve File
         const satRes = await execSat4J(fileName);
+        console.log(6)
         if (!satRes) {
             return null;
         }
@@ -282,5 +284,6 @@ export const solve = async (
     } finally {
         // Delete File
         await deleter(fileName);
+        console.log(7)
     }
 };
