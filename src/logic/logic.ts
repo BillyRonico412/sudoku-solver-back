@@ -245,9 +245,11 @@ export const solve = async (
     sudokuInfo: SudokuInfoType
 ): Promise<SudokuInfoType | null> => {
     const clauses = sudokuInfoToClauses(sudokuInfo);
+    console.log("0");
     if (!clauses) {
         return null;
     }
+    console.log("1");
     // Create string
     let resString = `p cnf ${9 * 9 * 9} ${clauses.length}\n`;
     clauses.forEach(
@@ -256,9 +258,11 @@ export const solve = async (
                 .map(String)
                 .reduce((v1, v2) => v1 + " " + v2)} 0\n`)
     );
+    console.log(2, resString);
     const writer = promisify(fs.appendFile);
     const deleter = promisify(fs.unlink);
     const fileName = v4();
+    console.log(4)
     try {
         // Create File
         await writer(fileName, resString);
@@ -273,7 +277,7 @@ export const solve = async (
         const sudokuInfoRes = satResToSudokuInfo(satRes);
         return sudokuInfoRes;
     } catch (e) {
-        console.log(e)
+        console.log(e);
         return null;
     } finally {
         // Delete File
