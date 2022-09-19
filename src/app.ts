@@ -12,6 +12,7 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(cors())
 
 app.post(process.env.PREFIX + "/", async (req, res) => {
     const body = req.body;
