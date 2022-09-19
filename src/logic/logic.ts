@@ -16,8 +16,8 @@ export const execSat4J = async (
         const { stdout, stderr } = await promisify(exec)(
             `java -jar sat4j.jar MiniSAT ${src}`
         );
-        console.log(10)
-        console.log(stdout, stderr)
+        console.log(10);
+        console.log(stdout, stderr);
         if (stderr) {
             return null;
         }
@@ -247,11 +247,9 @@ export const solve = async (
     sudokuInfo: SudokuInfoType
 ): Promise<SudokuInfoType | null> => {
     const clauses = sudokuInfoToClauses(sudokuInfo);
-    console.log("0");
     if (!clauses) {
         return null;
     }
-    console.log("1");
     // Create string
     let resString = `p cnf ${9 * 9 * 9} ${clauses.length}\n`;
     clauses.forEach(
@@ -260,18 +258,16 @@ export const solve = async (
                 .map(String)
                 .reduce((v1, v2) => v1 + " " + v2)} 0\n`)
     );
-    console.log(2);
     const writer = promisify(fs.appendFile);
     const deleter = promisify(fs.unlink);
     const fileName = v4();
-    console.log(4)
     try {
         // Create File
         await writer(fileName, resString);
-        console.log(5)
+        console.log(__dirname);
         // Solve File
         const satRes = await execSat4J(fileName);
-        console.log(6)
+        console.log(6);
         if (!satRes) {
             return null;
         }
@@ -286,6 +282,6 @@ export const solve = async (
     } finally {
         // Delete File
         await deleter(fileName);
-        console.log(7)
+        console.log(7);
     }
 };

@@ -241,25 +241,21 @@ const satResToSudokuInfo = (satRes) => {
 exports.satResToSudokuInfo = satResToSudokuInfo;
 const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     const clauses = (0, exports.sudokuInfoToClauses)(sudokuInfo);
-    console.log("0");
     if (!clauses) {
         return null;
     }
-    console.log("1");
     // Create string
     let resString = `p cnf ${9 * 9 * 9} ${clauses.length}\n`;
     clauses.forEach((clause) => (resString += `${clause
         .map(String)
         .reduce((v1, v2) => v1 + " " + v2)} 0\n`));
-    console.log(2);
     const writer = (0, util_1.promisify)(fs_1.default.appendFile);
     const deleter = (0, util_1.promisify)(fs_1.default.unlink);
     const fileName = (0, uuid_1.v4)();
-    console.log(4);
     try {
         // Create File
         yield writer(fileName, resString);
-        console.log(5);
+        console.log(__dirname);
         // Solve File
         const satRes = yield (0, exports.execSat4J)(fileName);
         console.log(6);
