@@ -5,7 +5,8 @@ module.exports = {
     env: {
       PORT: 8081,
       PREFIX: "/sudoku"
-    }
+    },
+    name: "sudoku"
   }],
 
   deploy: {
