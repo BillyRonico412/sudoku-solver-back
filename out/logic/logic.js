@@ -20,19 +20,19 @@ const uuid_1 = require("uuid");
 const execSat4J = (src) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { stdout, stderr } = yield (0, util_1.promisify)(child_process_1.exec)(`java -jar sat4j.jar MiniSAT ${src}`);
-        if (stderr) {
+        if (stderr !== '') {
             return null;
         }
-        const resLine = stdout.split("\n");
+        const resLine = stdout.split('\n');
         if (resLine.length === 7) {
             return { is: false, res: [] };
         }
         if (resLine.length === 10) {
-            if (resLine[7].split(" ")[1] === "UNSATISFIABLE") {
+            if (resLine[7].split(' ')[1] === 'UNSATISFIABLE') {
                 return { is: false, res: [] };
             }
         }
-        const resArray = resLine[8].split(" ");
+        const resArray = resLine[8].split(' ');
         const res = resArray.slice(1, resArray.length - 1).map(Number);
         return { is: true, res };
     }
@@ -44,7 +44,7 @@ const execSat4J = (src) => __awaiter(void 0, void 0, void 0, function* () {
 exports.execSat4J = execSat4J;
 const testSudokuInfo = (sudokuInfo) => sudokuInfo.length === 9 &&
     sudokuInfo.every((sudokuInfoLine) => sudokuInfoLine.length === 9 &&
-        sudokuInfoLine.every((item) => 0 <= item && item <= 9));
+        sudokuInfoLine.every((item) => item >= 0 && item <= 9));
 exports.testSudokuInfo = testSudokuInfo;
 const variableToDimacs = (variable) => variable.ligne * 81 + variable.colonne * 9 + variable.valeur + 1;
 exports.variableToDimacs = variableToDimacs;
@@ -239,14 +239,14 @@ const satResToSudokuInfo = (satRes) => {
 exports.satResToSudokuInfo = satResToSudokuInfo;
 const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
     const clauses = (0, exports.sudokuInfoToClauses)(sudokuInfo);
-    if (!clauses) {
+    if (clauses === null) {
         return null;
     }
     // Create string
     let resString = `p cnf ${9 * 9 * 9} ${clauses.length}\n`;
     clauses.forEach((clause) => (resString += `${clause
         .map(String)
-        .reduce((v1, v2) => v1 + " " + v2)} 0\n`));
+        .reduce((v1, v2) => v1 + ' ' + v2)} 0\n`));
     const writer = (0, util_1.promisify)(fs_1.default.appendFile);
     const deleter = (0, util_1.promisify)(fs_1.default.unlink);
     const fileName = (0, uuid_1.v4)();
@@ -255,7 +255,7 @@ const solve = (sudokuInfo) => __awaiter(void 0, void 0, void 0, function* () {
         yield writer(fileName, resString);
         // Solve File
         const satRes = yield (0, exports.execSat4J)(fileName);
-        if (!satRes) {
+        if (satRes === null) {
             return null;
         }
         if (!satRes.is) {
