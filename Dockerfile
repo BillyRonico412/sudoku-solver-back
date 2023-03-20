@@ -1,9 +1,9 @@
 # Docker with node and can exec command java
 FROM openjdk:latest
 
-RUN apk add --update -y curl \
+RUN apk add --update curl \
   && curl -sL https://deb.nodesource.com/setup_9.x | bash - \
-  && apk add --update -y nodejs \
+  && apk add --update nodejs \
   && curl -L https://www.npmjs.com/install.sh | sh
 ENV PORT 8080
 COPY package.json /app/package.json
